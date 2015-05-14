@@ -1,22 +1,22 @@
 <?php
-    function News_getAll(){
+    function News_getAll(){ // выводит все новости отсортированные по дате
 
-        $connection = mysqli_connect('localhost', 'root', '', 'test');
-        //Test if connection succeeded
+        $connection = mysqli_connect('localhost', 'root', '', 'test'); //подклчение к базе
+        // проверяем успешность подключения
         if(mysqli_connect_errno()){
             die("Database connection failed: "
                 . mysqli_connect_error() . " ("
                 . mysqli_connect_errno() . ")");
         }
 
-        //Perform database query
+        //выполняем запрос к базе
         $query  = "SELECT * ";
         $query .= "FROM news ";
         $query .= "ORDER BY date DESC";
 
 
         $result = mysqli_query($connection, $query);
-        //Test if there was a query error
+        //проверяем не было ли ошибок
         if(!$result){
             die("Database query failed.");
         }
@@ -29,23 +29,23 @@
         return $ret;
     }
 
-    function News_get($page_id){
-        $connection = mysqli_connect('localhost', 'root', '', 'test');
-        //Test if connection succeeded
+    function News_get($page_id){ // выводит выбранную пользователем новость
+        $connection = mysqli_connect('localhost', 'root', '', 'test');//подклчение к базе
+        // проверяем успешность подключения
         if(mysqli_connect_errno()){
             die("Database connection failed: "
                 . mysqli_connect_error() . " ("
                 . mysqli_connect_errno() . ")");
         }
 
-        //Perform database query
+        //выполняем запрос к базе
         $query  = "SELECT name, text, date ";
         $query .= "FROM news ";
         $query .= "WHERE id =" . $page_id;
 
 
         $result = mysqli_query($connection, $query);
-        //Test if there was a query error
+        //проверяем не было ли ошибок
         if(!$result){
             die("Database query failed.");
         }
