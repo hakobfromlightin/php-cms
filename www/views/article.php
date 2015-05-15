@@ -17,5 +17,6 @@
         echo $item['date'] . '<br>';
         ?><br>
     <?php endforeach; ?>
+    <a href="../add_news.php">Add an article</a>
 </body>
 </html>
