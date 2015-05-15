@@ -22,26 +22,20 @@
         return sql_query($query); //выполнение запроса
     }
 
-    function News_insert(){ // добавляет новость в базу данных
+    function News_insert($data){ // добавляет новость в базу данных
+        $name = $data['title'];
+        $text = $data['article'];
+        $date = date("Y-m-d");
 
-        if(empty($_POST['name']) || empty($_POST['text'])){ //проверяем введены ли данные
-            echo "Название или текст пустые";
-            exit;
-        } else {
-            $name = $_POST['name'];
-            $text = $_POST['text'];
-            $date = date("Y.d.m");
+        // команда вставки в таблицу
+        $query = "INSERT INTO news (";
+        $query .= "name, text, date";
+        $query .= ")VALUES (";
+        $query .= " '{$name}', '{$text}', '{$date}'";
+        $query .= ")";
 
-            // команда вставки в таблицу
-            $query = "INSERT INTO news (";
-            $query .= "name, text, date";
-            $query .= ")VALUES (";
-            $query .= " '{$name}', '{$text}', '{$date}'";
-            $query .= ")";
-
-            $res = sql_query($query);
-            if($res){
-                return true;
-            }
+        $res = sql_query($query);
+        if($res){
+            return true;
         }
     }
