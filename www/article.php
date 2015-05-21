@@ -1,7 +1,9 @@
 <?php
     $id = $_GET['id'];
-    require __DIR__ . '/models/news.php';
+    require __DIR__ . '/models/class_article.php';
 
-    $items = News_get($id);
+    $News = new News();
+
+    $items = $News->news_get($id);
 
     include __DIR__ . '/views/article.php';
