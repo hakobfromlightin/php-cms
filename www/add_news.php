@@ -1,5 +1,7 @@
 <?php
-    require_once __DIR__ . '/models/news.php';
+    require_once __DIR__ . '/models/class_article.php';
+
+    $News = new News();
 
     if(!empty($_POST)){
         $data=[];
@@ -10,10 +12,10 @@
             $data['article'] = $_POST['article'];
         }
         if(isset($data['title']) && $data['article']){
-            News_insert($data);
-            header('Location: /');
+            $News->news_insert($data);
+            header('Location: http://geekbrains.home//');
         }else{
-            echo "Название или текст пустые";
+            return false;
         }
     }
 
