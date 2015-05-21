@@ -1,0 +1,34 @@
+html{
+    background: linear-gradient(180deg, #d1ff8e, #ffe47c) no-repeat;
+    height: 100%;
+    width: 100%;
+    position:relative;
+}
+body{
+    padding: 10px;
+    margin: 0;
+
+}
+h2{
+    color: #ffbb19;
+}
+.header{
+    margin: 0 auto;
+    padding: 50px;
+    background-color: rgb(110, 110, 110);
+}
+.content{
+    background-color: aliceblue;
+    border-radius: 15px;
+    margin: 50px 25px;
+    padding: 100px;
+}
+.footer{
+    width: 100%;
+    position: absolute;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: rgb(110, 110, 110);
+    bottom: 0;
+    left:0;
+}
