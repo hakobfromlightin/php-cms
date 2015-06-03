@@ -33,7 +33,7 @@
             }
             $ret = [];
 
-            while ($row = mysqli_fetch_assoc($result)){
+            while ($row = mysqli_fetch_object($result)){
                 $ret[] = $row;
             }
             return $ret;
