@@ -6,7 +6,7 @@ class NewsController
     {
         $items = NewsModel::getAll();
         View::display('all.php');
-        echo '<html><link rel="stylesheet" href="views/1.css"></html>';
+        echo '<html><link rel="stylesheet" href="../assets/1.css"></html>';
     }
 
     public function actionOne()
