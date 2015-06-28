@@ -19,11 +19,6 @@ class AdminController
                 return false;
             }
         }
-        include __DIR__ . '/../views/Add.php';
-    }
-
-    public function actionUpdate()
-    {
-
+        View::display('add.php');
     }
 }
