@@ -4,7 +4,6 @@
         protected $db_user = "root";
         protected $db_password = "";
         protected $db_name = "test";
-        protected $connection;
 
         public function __construct(){ //метод подлючения к базе
             $this->connection = mysqli_connect($this->db_server, $this->db_user, $this->db_password, $this->db_name);
@@ -24,7 +23,7 @@
             }
         }
 
-        public function sql_query($query){ //метод выполняющий запрос
+        public function queryAll($query, $class='stdClass'){ //метод выполняющий запрос
 
             $result = mysqli_query($this->connection, $query);
             //проверяем не было ли ошибок
@@ -33,9 +32,14 @@
             }
             $ret = [];
 
-            while ($row = mysqli_fetch_object($result)){
+            while ($row = mysqli_fetch_object($result, $class)){
                 $ret[] = $row;
             }
             return $ret;
+        }
+
+        public function queryOne($query, $class='stdClass'){ //метод выполняющий запрос
+
+            return $this->queryAll($query, $class)[0];
         }
     }
