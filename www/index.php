@@ -1,10 +1,11 @@
 <?php
-    require __DIR__ . '/models/class_article.php';
+    require __DIR__ . '/autoload.php';
 
-    $News = new News();
+    $ctrl = isset($_GET['ctrl']) ? $_GET['ctrl'] : 'News';
+    $act = isset($_GET['act']) ? $_GET['act'] : 'All';
 
-    $items = $News->news_getAll();
+    $controllerClassName = $ctrl . 'Controller';
+    $controller = new $controllerClassName;
 
-    include __DIR__ . '/views/index.php';
-
-    echo '<html><link rel="stylesheet" href="views/1.css"></html>';
+    $method = 'action' . $act;
+    $controller->$method();
