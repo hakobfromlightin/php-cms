@@ -5,7 +5,7 @@ class NewsController
     public function actionAll()
     {
         $items = NewsModel::getAll();
-        include __DIR__ . '/../views/All.php';
+        View::display('all.php');
         echo '<html><link rel="stylesheet" href="views/1.css"></html>';
     }
 
@@ -13,6 +13,6 @@ class NewsController
     {
         $id = $_GET['id'];
         $item = NewsModel::getOne($id);
-        include __DIR__ . '/../views/One.php';
+        View::display('one.php');
     }
 }
