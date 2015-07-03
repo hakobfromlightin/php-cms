@@ -3,11 +3,14 @@
 class NewsModel
     extends AbstractModel
 {
+    /*
     public $id;
     public $title;
     public $text;
+    */
 
     protected static $table = 'news';
+    /*
     protected static $order = 'date DESC';
     protected static $class = 'NewsModel';
 
@@ -29,7 +32,6 @@ class NewsModel
         return $database->queryAll($query, static::$class);
     }
 
-    /*
     public static function update($data)
     {// обновляем новость в базе
        $name = $data['title'];
