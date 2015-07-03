@@ -19,6 +19,7 @@ class AdminController
                 return false;
             }
         }
-        View::display('add.php');
+        $view = new View();
+        $view->render('add.php');
     }
 }
