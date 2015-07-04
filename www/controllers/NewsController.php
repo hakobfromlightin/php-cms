@@ -4,12 +4,9 @@ class NewsController
 {
     public function actionAll()
     {
-        $db = new Database();
-        $res = $db->query(
-            'SELECT * FROM news WHERE id=:id',
-            [':id' => 1]
-        );
-        var_dump($res);die;
+        $r = NewsModel::findAll();
+        var_dump($r);
+
         /*
         $news = NewsModel::getAll();
         $view = new View();
@@ -24,7 +21,7 @@ class NewsController
     public function actionOne()
     {
         $id = $_GET['id'];
-        $article = NewsModel::getOne($id);
+        $article = NewsModel::findOneByPk($id);
         $view = new View();
 
         $view->item = $article;

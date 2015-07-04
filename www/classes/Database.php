@@ -7,6 +7,11 @@ class Database
     protected static $db_password = "";
     protected static $db_name = "test";
     private $dbh;
+    private $className = 'stdClass';
+
+    public function setClassName($className){
+        $this->className = $className;
+    }
 
     public function __construct()
     { //метод подлючения к базе
@@ -18,6 +23,6 @@ class Database
     {
         $sth = $this->dbh->prepare($sql);
         $sth->execute($params);
-        return $sth->fetchAll(PDO::FETCH_OBJ);
+        return $sth->fetchAll(PDO::FETCH_CLASS, $this->className);
     }
 }

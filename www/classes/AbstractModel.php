@@ -4,8 +4,21 @@ abstract class AbstractModel
 {
     protected static $table;
 
-    public static function getTable()
+    public static function findAll()
     {
-        return static::$table;
+        $class = get_called_class();
+        $sql = 'SELECT * FROM ' . static::$table;
+        $db = new Database();
+        $db->setClassName($class);
+        return $db->query($sql);
+    }
+
+    public static function findOneByPk($id)
+    {
+        $class = get_called_class();
+        $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:id';
+        $db = new Database();
+        $db->setClassName($class);
+        return $db->query($sql, [':id' => $id]);
     }
 }
