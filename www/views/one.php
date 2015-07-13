@@ -8,7 +8,7 @@
 <div class="header">
     <h1>Article</h1>
 </div>
-<?php echo '<h2>' . $item->name . '</h2><br>'; ?>
+<?php '<h2>' . $item->name . '</h2><br>'; ?>
 <?php echo $item->text . '<br>'; ?>
 <?php echo $item->date . '<br>'; ?>
 <!-- <a href="../controllers/update_news.php">Update an article</a><br> -->

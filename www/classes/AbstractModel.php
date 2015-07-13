@@ -3,6 +3,17 @@
 abstract class AbstractModel
 {
     protected static $table;
+    protected $data = [];
+
+    public function __set($k, $v)
+    {
+        $this->data[$k] = $v;
+    }
+
+    public function __get($k)
+    {
+        return $this->data[$k];
+    }
 
     public static function findAll()
     {
@@ -19,6 +30,30 @@ abstract class AbstractModel
         $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:id';
         $db = new Database();
         $db->setClassName($class);
-        return $db->query($sql, [':id' => $id]);
+        return $db->query($sql, [':id' => $id])[0];
+    }
+
+    public static function findByColumn($column, $value)
+    {
+        $class = get_called_class();
+        $sql = 'SELECT * FROM ' . static::$table . ' WHERE ' . $column . ' = :' . $column;
+        $db = new Database();
+        $db->setClassName($class);
+        return $db->query($sql, [":$column" => $value])[0];
+    }
+
+    public function insert()
+    {
+        $cols = array_keys($this->data); // названия столбцов
+        $data = [];
+
+        foreach ($cols as $col) {
+            $data[':' . $col] = $this->data[$col];
+        }
+
+        $sql = 'INSERT INTO ' . static::$table . '(' . implode(', ', $cols) . ') VALUES (' . implode(', ', array_keys($data)) . ')';
+        $db = new Database();
+
+        return $db->execute($sql, $data);
     }
 }

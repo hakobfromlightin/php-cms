@@ -5,21 +5,18 @@ class AdminController
     public function actionAdd()
     {
         if(!empty($_POST)){
-            $data=[];
-            if(!empty($_POST['title'])){
-                $data['title'] = $_POST['title'];
-            }
-            if(!empty($_POST['article'])) {
-                $data['article'] = $_POST['article'];
-            }
-            if(isset($data['title']) && $data['article']){
-                NewsModel::insert($data);
+            if(isset($_POST['title']) && $_POST['article']) {
+                $article = new NewsModel();
+                $article->name = $_POST['title'];
+                $article->text = $_POST['article'];
+                $article->date = date("Y-m-d");
+                $article->insert();
                 header('Location: http://geekbrains.home');
             }else{
                 return false;
             }
         }
         $view = new View();
-        $view->render('add.php');
+        echo $view->render('add.php');
     }
 }

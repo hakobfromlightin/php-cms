@@ -17,11 +17,7 @@
         <?php foreach ($items as $item): ?>
             <tr>
                 <td><?php
-                    if (!empty($item->id)) {
-                        $article_id = $item->id;
-                    } else {
-                        $article_id = 0;
-                    }
+                    $article_id = $item->id;
                     $nws_ref = '<a href=index.php?ctrl=News&act=One&id=' . $article_id . '>' . $item->name . '</a>';
                     echo $nws_ref; ?>
                 </td>
