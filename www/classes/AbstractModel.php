@@ -56,4 +56,28 @@ abstract class AbstractModel
 
         return $db->execute($sql, $data);
     }
+
+    public function update()
+    {
+        $cols = array_keys($this->data); // названия столбцов
+        $data = [];
+
+        foreach ($cols as $col) {
+            $data[':' . $col] = $this->data[$col];
+        }
+
+        $sql = 'UPDATE ' . static::$table . ' SET ' . 'name=:name, text=:text, date=:date' . ' WHERE id=:id';
+        $db = new Database();
+        return $db->execute($sql, $data);
+    }
+
+    public function delete($id)
+    {
+        $data[':id'] = $id;
+
+        $sql = 'DELETE FROM ' . static::$table . ' WHERE id=:id';
+        $db = new Database();
+
+        return $db->execute($sql, $data);
+    }
 }

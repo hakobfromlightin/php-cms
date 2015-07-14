@@ -14,14 +14,10 @@ class NewsController
 
     public function actionOne()
     {
-        $article = NewsModel::$table;
-        var_dump($article);
-        /*
         $id = $_GET['id'];
         $article = NewsModel::findOneByPk($id);
         $view = new View();
-
         $view->item = $article;
-        echo $view->render('one.php');*/
+        echo $view->render('one.php');
     }
 }

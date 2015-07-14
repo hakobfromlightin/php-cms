@@ -11,7 +11,10 @@
 <?php echo '<h2>' . $item->name . '</h2><br>'; ?>
 <?php echo $item->text . '<br>'; ?>
 <?php echo $item->date . '<br>'; ?>
-<a href="../controllers/add_news.php">Add an article</a><br>
+
+<a href="/../index.php?ctrl=Admin&act=Add">Add new article</a><br>
+<?php echo $nws_ref = '<a href=/../index.php?ctrl=Admin&act=Edit&id=' . $item->id . '>Edit an article</a><br>'; ?>
+<?php echo $nws_ref = '<a href=/../index.php?ctrl=Admin&act=Delete&id=' . $item->id . '>Delete an article</a><br>'; ?>
 <a href="../index.php">Home</a><br>
 
 <div class="footer"></div>

@@ -9,7 +9,8 @@ class Database
     private $dbh;
     private $className = 'stdClass';
 
-    public function setClassName($className){
+    public function setClassName($className)
+    {
         $this->className = $className;
     }
 
@@ -17,6 +18,11 @@ class Database
     { //метод подлючения к базе
         $dsn = 'mysql:dbname=' . self::$db_name . ';host=' . self::$host;
         $this->dbh = new PDO($dsn, self::$db_user, self::$db_password);
+    }
+
+    protected function affectedRow()
+    {
+        return $this->dbh->lastInsertId();
     }
 
     public function query($sql, $params = [])
@@ -29,6 +35,7 @@ class Database
     public function execute($sql, $params = [])
     {
         $sth = $this->dbh->prepare($sql);
-        return $sth->execute($params);
+        $sth->execute($params);
+        return $this->affectedRow();
     }
 }

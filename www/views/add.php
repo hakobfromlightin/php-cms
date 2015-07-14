@@ -12,8 +12,6 @@
     Article name:<input type="text" name="title"><br>
     Text:<textarea rows="10" cols="70" name="article"></textarea><br>
     <input type="submit" value="Отправить"><br>
-
-
 </form>
 <a href="../index.php">Home</a><br/>
 <div class="footer"></div>
