@@ -15,6 +15,11 @@ abstract class AbstractModel
         return $this->data[$k];
     }
 
+    public function __isset($k)
+    {
+        return isset($this->data[$k]);
+    }
+
     public static function findAll()
     {
         $class = get_called_class();
@@ -42,7 +47,7 @@ abstract class AbstractModel
         return $db->query($sql, [":$column" => $value])[0];
     }
 
-    public function insert()
+    protected function insert()
     {
         $cols = array_keys($this->data); // названия столбцов
         $data = [];
@@ -54,27 +59,41 @@ abstract class AbstractModel
         $sql = 'INSERT INTO ' . static::$table . '(' . implode(', ', $cols) . ') VALUES (' . implode(', ', array_keys($data)) . ')';
         $db = new Database();
 
-        return $db->execute($sql, $data);
+        $db->execute($sql, $data);
+        return $this->id = $db->lastInsertId();
     }
 
-    public function update()
+    protected function update()
     {
         $cols = array_keys($this->data); // названия столбцов
         $data = [];
+        $dataV = [];
 
         foreach ($cols as $col) {
             $data[':' . $col] = $this->data[$col];
+            if('id'== $col){
+                continue;
+            }
+            $dataV[$col] = $col . '=:' . $col;
         }
 
-        $sql = 'UPDATE ' . static::$table . ' SET ' . 'name=:name, text=:text, date=:date' . ' WHERE id=:id';
+        $sql = 'UPDATE ' . static::$table . ' SET ' . implode(', ', $dataV) . ' WHERE id=:id';
         $db = new Database();
         return $db->execute($sql, $data);
     }
 
-    public function delete($id)
+    public function save()
     {
-        $data[':id'] = $id;
+        if (isset($this->id)) {
+            $this->update();
+        } else {
+            $this->insert();
+        }
+    }
 
+    public function delete()
+    {
+        $data[':id'] = $_GET['id'];
         $sql = 'DELETE FROM ' . static::$table . ' WHERE id=:id';
         $db = new Database();
 

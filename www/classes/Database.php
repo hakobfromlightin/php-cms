@@ -20,7 +20,7 @@ class Database
         $this->dbh = new PDO($dsn, self::$db_user, self::$db_password);
     }
 
-    protected function affectedRow()
+    public function lastInsertId()
     {
         return $this->dbh->lastInsertId();
     }
@@ -36,6 +36,6 @@ class Database
     {
         $sth = $this->dbh->prepare($sql);
         $sth->execute($params);
-        return $this->affectedRow();
+        return $this->lastInsertId();
     }
 }

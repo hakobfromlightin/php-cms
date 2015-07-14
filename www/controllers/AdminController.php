@@ -10,7 +10,7 @@ class AdminController
                 $article->name = $_POST['title'];
                 $article->text = $_POST['article'];
                 $article->date = date("Y-m-d");
-                $article->insert();
+                $article->save();
                 header('Location: http://geekbrains.home');
             }else{
                 return false;
@@ -30,7 +30,7 @@ class AdminController
                 $article->text = $_POST['article'];
                 $article->date = date("Y-m-d");
                 $article->id = $id;
-                $article->update();
+                $article->save();
                 header('Location: http://geekbrains.home');
             } else {
                 return false;
@@ -45,7 +45,7 @@ class AdminController
     public function actionDelete()
     {
         $article = new NewsModel();
-        $article->delete($_GET['id']);
+        $article->delete();
         header('Location: http://geekbrains.home');
     }
 }
