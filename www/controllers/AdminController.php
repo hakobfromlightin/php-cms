@@ -13,7 +13,8 @@ class AdminController
                 $article->save();
                 header('Location: http://geekbrains.home');
             }else{
-                return false;
+                header("HTTP/1.1 404 Not Found");
+                throw new E404Ecxeption('Данные для редактирования записи не отправлены');
             }
         }
         $view = new View();
@@ -26,6 +27,9 @@ class AdminController
         if (!empty($_POST)) {
             if (isset($_POST['title']) && $_POST['article']) {
                 $article = new NewsModel();
+                if(empty($article)){
+                    throw new E404Ecxeption('Попытка отредактировать несуществующую запись');
+                }
                 $article->name = $_POST['title'];
                 $article->text = $_POST['article'];
                 $article->date = date("Y-m-d");
@@ -33,10 +37,15 @@ class AdminController
                 $article->save();
                 header('Location: http://geekbrains.home');
             } else {
-                return false;
+                header("HTTP/1.1 404 Not Found");
+                throw new E404Ecxeption('Данные для редактирования записи не отправлены');
             }
         }
         $article = NewsModel::findOneByPk($id);
+        if(empty($article)){
+            header("HTTP/1.1 404 Not Found");
+            throw new E404Ecxeption('Запись для редактирования не найдена');
+        }
         $view = new View();
         $view->item = $article;
         echo $view->render('update.php');
@@ -45,7 +54,17 @@ class AdminController
     public function actionDelete()
     {
         $article = new NewsModel();
+        $article->id = $_GET['id'];
+        if(empty($article)){
+            header("HTTP/1.1 404 Not Found");
+            throw new E404Ecxeption('Попытка удалить несуществующую запись');
+        }
         $article->delete();
         header('Location: http://geekbrains.home');
+    }
+
+    public function actionLog()
+    {
+        include __DIR__ . '/../exceptions_log.html';
     }
 }

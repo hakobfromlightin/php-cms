@@ -16,6 +16,11 @@ class NewsController
     {
         $id = $_GET['id'];
         $article = NewsModel::findOneByPk($id);
+        if(empty($article)){
+            header("HTTP/1.1 404 Not Found");
+            http_response_code(404);
+            throw new E404Ecxeption('Запись не сущетсвует');
+        }
         $view = new View();
         $view->item = $article;
         echo $view->render('one.php');
