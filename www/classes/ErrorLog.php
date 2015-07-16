@@ -1,12 +1,12 @@
 <?php
 
-class Log
+class ErrorLog
     extends ErrorException
 {
     public static function newMessage(
         Exception $exception,
         $clear = false,
-        $error_file = 'exceptions_log.html'
+        $error_file = 'views/log.php'
     )
     {
         $message = $exception->getMessage();

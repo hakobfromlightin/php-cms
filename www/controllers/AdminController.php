@@ -14,7 +14,7 @@ class AdminController
                 header('Location: http://geekbrains.home');
             }else{
                 header("HTTP/1.1 404 Not Found");
-                throw new E404Ecxeption('Данные для редактирования записи не отправлены');
+                throw new E404Exception('Данные для редактирования записи не отправлены');
             }
         }
         $view = new View();
@@ -28,7 +28,7 @@ class AdminController
             if (isset($_POST['title']) && $_POST['article']) {
                 $article = new NewsModel();
                 if(empty($article)){
-                    throw new E404Ecxeption('Попытка отредактировать несуществующую запись');
+                    throw new E404Exception('Попытка отредактировать несуществующую запись');
                 }
                 $article->name = $_POST['title'];
                 $article->text = $_POST['article'];
@@ -38,13 +38,13 @@ class AdminController
                 header('Location: http://geekbrains.home');
             } else {
                 header("HTTP/1.1 404 Not Found");
-                throw new E404Ecxeption('Данные для редактирования записи не отправлены');
+                throw new E404Exception('Данные для редактирования записи не отправлены');
             }
         }
         $article = NewsModel::findOneByPk($id);
         if(empty($article)){
             header("HTTP/1.1 404 Not Found");
-            throw new E404Ecxeption('Запись для редактирования не найдена');
+            throw new E404Exception('Запись для редактирования не найдена');
         }
         $view = new View();
         $view->item = $article;
@@ -57,7 +57,7 @@ class AdminController
         $article->id = $_GET['id'];
         if(empty($article)){
             header("HTTP/1.1 404 Not Found");
-            throw new E404Ecxeption('Попытка удалить несуществующую запись');
+            throw new E404Exception('Попытка удалить несуществующую запись');
         }
         $article->delete();
         header('Location: http://geekbrains.home');
@@ -65,6 +65,7 @@ class AdminController
 
     public function actionLog()
     {
-        include __DIR__ . '/../exceptions_log.html';
+        $view = new View();
+        echo $view->render('log.php');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class E404Ecxeption
+class E404Exception
     extends Exception
 {
     protected $message;

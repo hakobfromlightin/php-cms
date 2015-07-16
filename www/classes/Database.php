@@ -21,9 +21,7 @@ class Database
             $this->dbh = new PDO($dsn, self::$db_user, self::$db_password);
             $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            echo 'Проблема с базой данных';
-            $log = Log::newMessage($e);
-            die;
+            throw new PDOException();
         }
     }
 
@@ -32,9 +30,7 @@ class Database
         try {
             return $this->dbh->lastInsertId();
         } catch (PDOException $e) {
-            echo 'Проблема с базой данных';
-            $log = Log::newMessage($e);
-            die;
+            throw new PDOException();
         }
     }
 
@@ -45,9 +41,7 @@ class Database
             $sth->execute($params);
             return $sth->fetchAll(PDO::FETCH_CLASS, $this->className);
         } catch (PDOException $e) {
-            echo 'Проблема с базой данных';
-            $log = Log::newMessage($e);
-            die;
+            throw new PDOException();
         }
     }
 
@@ -58,9 +52,7 @@ class Database
             $sth->execute($params);
             return $this->lastInsertId();
         } catch (PDOException $e) {
-            echo 'Проблема с базой данных';
-            $log = Log::newMessage($e);
-            die;
+            throw new PDOException();
         }
     }
 }
