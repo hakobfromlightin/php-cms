@@ -18,12 +18,27 @@ class Admin
                 $article->text = $_POST['article'];
                 $article->date = date("Y-m-d");
                 $article->save();
+                $mail=new \PHPMailer();
+                $mail->isSMTP();
+                $mail->Host='smtp.gmail.com';
+                $mail->Username='hakob93bagghdasaryan@gmail.com';
+                $mail->Password='secret';
+                $mail->SMTPAuth = true;
+                $mail->SMTPSecure = 'ssl';
+                $mail->Port = '465';
+                $mail->addAddress('hakob93bagghdasaryan@gmail.com');
+                $mail->Body='Created news';
+                $mail->AltBody='Body created';
+                $mail->send();
+                $mail->clearAddresses();
                 header('Location: http://geekbrains.home');
             }else{
                 header("HTTP/1.1 404 Not Found");
                 throw new E404Exception('Данные для редактирования записи не отправлены');
             }
         }
+        $mailer = new \PHPMailer();
+        $mailer->send();
         $view = new View();
         echo $view->render('add.php');
     }

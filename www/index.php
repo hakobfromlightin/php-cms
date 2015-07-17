@@ -5,8 +5,6 @@
     use Application\Classes\View;
     use Application\Controllers;
 
-
-
     $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $pathParts = explode('/', $path);
 
