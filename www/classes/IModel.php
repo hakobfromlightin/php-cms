@@ -1,5 +1,7 @@
 <?php
 
+namespace Application\Classes;
+
 interface IModel
 {
     public static function getAll();

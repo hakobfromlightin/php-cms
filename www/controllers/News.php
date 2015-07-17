@@ -1,10 +1,15 @@
 <?php
+namespace Application\Controllers;
 
-class NewsController
+use Application\Models\News as Model;
+use Application\Classes\View;
+use Application\Classes\E404Exception;
+
+class News
 {
     public function actionAll()
     {
-        $news = NewsModel::findAll();
+        $news = Model::findAll();
         $view = new View();
 
         $view->items = $news;
@@ -15,11 +20,11 @@ class NewsController
     public function actionOne()
     {
         $id = $_GET['id'];
-        $article = NewsModel::findOneByPk($id);
+        $article = Model::findOneByPk($id);
         if(empty($article)){
             header("HTTP/1.1 404 Not Found");
             http_response_code(404);
-            throw new E404Ecxeption('Запись не сущетсвует');
+            throw new E404Exception('Запись не сущетсвует');
         }
         $view = new View();
         $view->item = $article;

@@ -8,7 +8,7 @@
 <div class="header">
     <h2>Add an article</h2>
 </div>
-<form action="/../index.php?ctrl=Admin&act=Add" method="post">
+<form action="/../Admin/Add" method="post">
     Article name:<input type="text" name="title"><br>
     Text:<textarea rows="10" cols="70" name="article"></textarea><br>
     <input type="submit" value="Отправить"><br>

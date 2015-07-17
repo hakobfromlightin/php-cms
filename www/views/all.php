@@ -18,14 +18,14 @@
             <tr>
                 <td><?php
                     $article_id = $item->id;
-                    $nws_ref = '<a href=index.php?ctrl=News&act=One&id=' . $article_id . '>' . $item->name . '</a>';
+                    $nws_ref = '<a href=/News/one?id=' . $article_id . '>' . $item->name . '</a>';
                     echo $nws_ref;
                     ?>
                 </td>
             </tr>
         <?php endforeach; ?>
     </table>
-    <a href="/../index.php?ctrl=Admin&act=Add">Add an article</a>
+    <a href="/../Admin/Add">Add an article</a>
 </div>
 <div class="footer"></div>
 </body>

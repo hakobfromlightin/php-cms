@@ -8,7 +8,7 @@
 <div class="header">
     <h2>Edit an article</h2>
 </div>
-<form action="/../index.php?ctrl=Admin&act=Edit&id=<?php echo $_GET['id']?>" method="post">
+<form action="/../Admin/Edit?id=<?php echo $_GET['id']?>" method="post">
     Article name:<input type="text" name="title" value="<?php echo $item->name; ?>"><br>
     Text:<textarea rows="10" cols="70" name="article"><?php echo $item->text; ?></textarea><br>
     <input type="submit" value="Send"><br>

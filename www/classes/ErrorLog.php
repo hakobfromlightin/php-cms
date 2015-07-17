@@ -1,10 +1,12 @@
 <?php
 
+namespace Application\Classes;
+
 class ErrorLog
-    extends ErrorException
+    extends \ErrorException
 {
     public static function newMessage(
-        Exception $exception,
+        \Exception $exception,
         $clear = false,
         $error_file = 'views/log.php'
     )

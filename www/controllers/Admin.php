@@ -1,12 +1,19 @@
 <?php
 
-class AdminController
+namespace Application\Controllers;
+
+use Application\Classes\E404Exception;
+use Application\Classes\View;
+use Application\Models\News as Model;
+
+
+class Admin
 {
     public function actionAdd()
     {
         if(!empty($_POST)){
             if(isset($_POST['title']) && $_POST['article']) {
-                $article = new NewsModel();
+                $article = new Model();
                 $article->name = $_POST['title'];
                 $article->text = $_POST['article'];
                 $article->date = date("Y-m-d");
@@ -26,7 +33,7 @@ class AdminController
         $id = $_GET['id'];
         if (!empty($_POST)) {
             if (isset($_POST['title']) && $_POST['article']) {
-                $article = new NewsModel();
+                $article = new Model();
                 if(empty($article)){
                     throw new E404Exception('Попытка отредактировать несуществующую запись');
                 }
@@ -41,7 +48,7 @@ class AdminController
                 throw new E404Exception('Данные для редактирования записи не отправлены');
             }
         }
-        $article = NewsModel::findOneByPk($id);
+        $article = Model::findOneByPk($id);
         if(empty($article)){
             header("HTTP/1.1 404 Not Found");
             throw new E404Exception('Запись для редактирования не найдена');
@@ -53,7 +60,7 @@ class AdminController
 
     public function actionDelete()
     {
-        $article = new NewsModel();
+        $article = new Model();
         $article->id = $_GET['id'];
         if(empty($article)){
             header("HTTP/1.1 404 Not Found");

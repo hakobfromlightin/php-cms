@@ -1,5 +1,7 @@
 <?php
 
+namespace Application\Classes;
+
 abstract class AbstractModel
 {
     protected static $table;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Application\Classes;
+
 class Database
 {
     protected static $host = "localhost";
@@ -18,10 +20,10 @@ class Database
     { //метод подлючения к базе
         try {
             $dsn = 'mysql:dbname=' . self::$db_name . ';host=' . self::$host;
-            $this->dbh = new PDO($dsn, self::$db_user, self::$db_password);
-            $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            throw new PDOException();
+            $this->dbh = new \PDO($dsn, self::$db_user, self::$db_password);
+            $this->dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        } catch (\PDOException $e) {
+            throw new \PDOException();
         }
     }
 
@@ -29,8 +31,8 @@ class Database
     {
         try {
             return $this->dbh->lastInsertId();
-        } catch (PDOException $e) {
-            throw new PDOException();
+        } catch (\PDOException $e) {
+            throw new \PDOException();
         }
     }
 
@@ -39,9 +41,9 @@ class Database
         try {
             $sth = $this->dbh->prepare($sql);
             $sth->execute($params);
-            return $sth->fetchAll(PDO::FETCH_CLASS, $this->className);
-        } catch (PDOException $e) {
-            throw new PDOException();
+            return $sth->fetchAll(\PDO::FETCH_CLASS, $this->className);
+        } catch (\PDOException $e) {
+            throw new \PDOException();
         }
     }
 
@@ -51,8 +53,8 @@ class Database
             $sth = $this->dbh->prepare($sql);
             $sth->execute($params);
             return $this->lastInsertId();
-        } catch (PDOException $e) {
-            throw new PDOException();
+        } catch (\PDOException $e) {
+            throw new \PDOException();
         }
     }
 }
